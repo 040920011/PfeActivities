@@ -121,12 +121,12 @@ class PfeController extends Controller
                 return redirect(route('PfeIndex'));
             }
         }
-        if(\App\Utils\Helper::isClient() && $user === auth()->user()){
+        if(userRole() === "client" && $user === auth()->user()){
             $client=Client::find(auth()->user()->userable_id);
             $reservs = Reservation::where('client_id',$user->userable_id)->where('reservation_time','>=', now())->orderBy('reservation_time','asc')->get();
             //  dd($reservs);
             return view('client.profile',['client' =>$client,'reservations'=>$reservs]);
-        }elseif(\App\Utils\Helper::isOrganizer($user) ){
+        }elseif(userRole($user) === "organizer" ){
             $organizer = Organizer::find($user->userable_id);
             $activities =$organizer->activities()->get();
             return view('profile.index', ['utilisateur' =>$organizer, 'activities' => $activities]);

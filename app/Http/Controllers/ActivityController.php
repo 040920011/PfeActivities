@@ -5,6 +5,8 @@ use Illuminate\Support\Facades\Storage;
 use App\Models\Activity;
 use App\Models\User;
 use App\Models\Category;
+use App\Models\Admin;
+use App\Models\Client;
 use App\Models\Organizer;
 use Illuminate\Http\Request;
 class ActivityController extends Controller
